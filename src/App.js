@@ -53,10 +53,24 @@ function App() {
     }
   };
 
+  const handleCallChange = (songName, partName, newValue) => {
+    const updatedSongs = songs.map(song => {
+      if (song.name === songName) {
+        const newCalls = {
+          ...song.calls,
+          [partName]: newValue
+        };
+        return { ...song, calls: newCalls };
+      }
+      return song;
+    });
+    setSongs(updatedSongs);
+  };
+
   return (
     <div>
       <h1>Idol Call Chart Maker</h1>
-      <CallTable songs={songs} />
+      <CallTable songs={songs} handleCallChange={handleCallChange} />
       <ActionButtons addSong={addSong} addPart={addPart} />
     </div>
   );

@@ -1,7 +1,8 @@
 import React from 'react';
 import './CallTable.css';
 
-function CallTable({ songs }) {
+function CallTable({ songs, handleCallChange }) {
+
   return (
     <table>
       <thead>
@@ -17,7 +18,13 @@ function CallTable({ songs }) {
             <tr key={`${song.name}-${part}`}>
               <td>{song.name}</td>
               <td>{part}</td>
-              <td>{chant}</td>
+              <td>
+                <input
+                  type="text"
+                  value={chant}
+                  onChange={(e) => handleCallChange(song.name, part, e.target.value)}
+                />
+              </td>
             </tr>
           ))
         ))}
