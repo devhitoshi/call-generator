@@ -1,0 +1,13 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+}
+
+th {
+  background-color: #f7f8fa;
+}
