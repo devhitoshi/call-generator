@@ -2,6 +2,7 @@ import React from 'react';
 import './CallTable.css';
 
 function CallTable({ songs, handleCallChange }) {
+
   return (
     <table>
       <thead>
