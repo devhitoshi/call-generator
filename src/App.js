@@ -20,6 +20,7 @@ function App() {
     }
   ]);
 
+  const presets = ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'];
   const addSong = () => {
     // Get the structure of calls from the first song, if it exists
     const callKeys = songs.length > 0 ? Object.keys(songs[0].calls) : [];
@@ -70,7 +71,7 @@ function App() {
   return (
     <div>
       <h1>Idol Call Chart Maker</h1>
-      <CallTable songs={songs} handleCallChange={handleCallChange} />
+      <CallTable songs={songs} handleCallChange={handleCallChange} presets={presets} />
       <ActionButtons addSong={addSong} addPart={addPart} />
     </div>
   );

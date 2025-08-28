@@ -1,8 +1,7 @@
 import React from 'react';
 import './CallTable.css';
 
-function CallTable({ songs, handleCallChange }) {
-
+function CallTable({ songs, handleCallChange, presets }) {
   return (
     <table>
       <thead>
@@ -24,6 +23,14 @@ function CallTable({ songs, handleCallChange }) {
                   value={chant}
                   onChange={(e) => handleCallChange(song.name, part, e.target.value)}
                 />
+                {presets.map(preset => (
+                  <button
+                    key={preset}
+                    onClick={() => handleCallChange(song.name, part, preset)}
+                  >
+                    {preset}
+                  </button>
+                ))}
               </td>
             </tr>
           ))
