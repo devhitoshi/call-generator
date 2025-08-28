@@ -21,7 +21,6 @@ function App() {
   ]);
 
   const presets = ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'];
-
   const addSong = () => {
     // Get the structure of calls from the first song, if it exists
     const callKeys = songs.length > 0 ? Object.keys(songs[0].calls) : [];
