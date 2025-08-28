@@ -36,11 +36,28 @@ function App() {
     setSongs([...songs, newSong]);
   };
 
+  const addPart = () => {
+    const newPartName = window.prompt("新しいパート名を入力してください：");
+    if (newPartName && newPartName.trim() !== '') {
+      const trimmedPartName = newPartName.trim();
+      const updatedSongs = songs.map(song => {
+        // Create a new calls object with the new part
+        const newCalls = {
+          ...song.calls,
+          [trimmedPartName]: ''
+        };
+        // Return a new song object
+        return { ...song, calls: newCalls };
+      });
+      setSongs(updatedSongs);
+    }
+  };
+
   return (
     <div>
       <h1>Idol Call Chart Maker</h1>
       <CallTable songs={songs} />
-      <ActionButtons addSong={addSong} />
+      <ActionButtons addSong={addSong} addPart={addPart} />
     </div>
   );
 }
