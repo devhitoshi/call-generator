@@ -20,11 +20,27 @@ function App() {
     }
   ]);
 
+  const addSong = () => {
+    // Get the structure of calls from the first song, if it exists
+    const callKeys = songs.length > 0 ? Object.keys(songs[0].calls) : [];
+    const newCalls = callKeys.reduce((acc, key) => {
+      acc[key] = '';
+      return acc;
+    }, {});
+
+    const newSong = {
+      name: '新しい曲',
+      calls: newCalls,
+    };
+
+    setSongs([...songs, newSong]);
+  };
+
   return (
     <div>
       <h1>Idol Call Chart Maker</h1>
       <CallTable songs={songs} />
-      <ActionButtons />
+      <ActionButtons addSong={addSong} />
     </div>
   );
 }

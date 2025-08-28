@@ -1,7 +1,6 @@
 import React from 'react';
 import './CallTable.css';
 
-
 function CallTable({ songs }) {
   return (
     <table>
