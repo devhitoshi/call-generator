@@ -1,24 +1,27 @@
 import React from 'react';
 import './CallTable.css';
 
-function CallTable() {
+
+function CallTable({ songs }) {
   return (
     <table>
       <thead>
         <tr>
-          <th>Call</th>
+          <th>Song</th>
+          <th>Part</th>
           <th>Chant</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Tiger</td>
-          <td>Taiga</td>
-        </tr>
-        <tr>
-          <td>Fire</td>
-          <td>Faiya</td>
-        </tr>
+        {songs.map(song => (
+          Object.entries(song.calls).map(([part, chant]) => (
+            <tr key={`${song.name}-${part}`}>
+              <td>{song.name}</td>
+              <td>{part}</td>
+              <td>{chant}</td>
+            </tr>
+          ))
+        ))}
       </tbody>
     </table>
   );
