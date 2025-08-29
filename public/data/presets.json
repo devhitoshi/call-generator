@@ -1,11 +1,25 @@
-{
-  "MIX": [
-    "スタンダードMIX", "日本語MIX", "アイヌ日可変", "アイヌ日可変（逆打ち）", "チキパMIX", "パンMIX", "スペイン語MIX", "ミョーホントゥスケ広場", "可変3連MIX", "混沌MIX"
-  ],
-  "口上・コール": [
-    "ガチ恋口上", "ビスマルク口上", "パンザマストドン口上", "ワールドカオス", "PPPH", "オーイング"
-  ],
-  "動作・ヲタ芸": [
-    "振りコピ", "ケチャ", "マサイ", "平泳ぎ", "ロマンス", "サンダースネイク", "サンスネ（逆打ち）"
-  ]
-}
+[
+  { "name": "スタンダードMIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "日本語MIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "アイヌ日可変", "category": "MIX", "category_name": "MIX" },
+  { "name": "アイヌ日可変（逆打ち）", "category": "MIX", "category_name": "MIX" },
+  { "name": "チキパMIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "パンMIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "スペイン語MIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "ミョーホントゥスケ広場", "category": "MIX", "category_name": "MIX" },
+  { "name": "可変3連MIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "混沌MIX", "category": "MIX", "category_name": "MIX" },
+  { "name": "ガチ恋口上", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "ビスマルク口上", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "パンザマストドン口上", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "ワールドカオス", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "PPPH", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "オーイング", "category": "Koujou", "category_name": "口上・コール" },
+  { "name": "振りコピ", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "ケチャ", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "マサイ", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "平泳ぎ", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "ロマンス", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "サンダースネイク", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+  { "name": "サンスネ（逆打ち）", "category": "Dousa", "category_name": "動作・ヲタ芸" }
+]

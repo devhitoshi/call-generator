@@ -29,13 +29,25 @@ function Modal({ isOpen, onClose, song, part, onSave, presets }) {
           rows="4"
         />
         <div className="presets">
-          {presets && Object.entries(presets).map(([category, presetList]) => (
-            <div key={category} className="preset-category">
-              <h4 className="preset-category-title">{category}</h4>
+          {presets && Object.entries(
+            presets.reduce((acc, preset) => {
+              if (!acc[preset.category_name]) {
+                acc[preset.category_name] = [];
+              }
+              acc[preset.category_name].push(preset);
+              return acc;
+            }, {})
+          ).map(([categoryName, presetList]) => (
+            <div key={categoryName} className="preset-category">
+              <h4 className="preset-category-title">{categoryName}</h4>
               <div className="preset-buttons">
                 {presetList.map(preset => (
-                  <button key={preset} onClick={() => setCall(call + preset)} className="preset-button">
-                    {preset}
+                  <button
+                    key={preset.name}
+                    onClick={() => setCall(call + preset.name)}
+                    className={`preset-button preset-${preset.category.toLowerCase()}`}
+                  >
+                    {preset.name}
                   </button>
                 ))}
               </div>

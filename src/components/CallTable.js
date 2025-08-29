@@ -21,7 +21,32 @@ function CallTable() {
     setSelectedCell({ song: null, part: null });
   };
 
-  // return文以降は、mainブランチの完成された構造をそのまま使う
+  const presetsMap = new Map(presets.map(p => [p.name, p.category]));
+
+  const renderCellContent = (text) => {
+    if (!text) return '';
+
+    // Create a regex that finds any of the preset names
+    const presetNames = Array.from(presetsMap.keys());
+    // Escape special characters for regex
+    const escapedPresetNames = presetNames.map(name => name.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const regex = new RegExp(`(${escapedPresetNames.join('|')})`, 'g');
+
+    const parts = text.split(regex);
+
+    return parts.map((part, index) => {
+      const category = presetsMap.get(part);
+      if (category) {
+        return (
+          <span key={index} className={`call-tag call-tag-${category.toLowerCase()}`}>
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <>
       <div className="table-container">
@@ -44,7 +69,7 @@ function CallTable() {
                 <td>{song.name}</td>
                 {parts.map(part => (
                   <td key={part} onClick={() => openModal(song, part)}>
-                    {song.calls[part] || ''}
+                    {renderCellContent(song.calls[part] || '')}
                   </td>
                 ))}
                 <td>
