@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './ActionButtons.css';
 import { SongContext } from '../contexts/SongContext';
+import { FaPlus, FaMusic, FaImage } from 'react-icons/fa';
 
 function ActionButtons({ onExportClick }) {
   const {
@@ -26,9 +27,9 @@ function ActionButtons({ onExportClick }) {
 
   return (
     <div className="action-buttons">
-      <button onClick={toggleAddPartForm}>パートを追加</button>
-      <button onClick={addSong}>楽曲を追加</button>
-      <button onClick={onExportClick}>画像として保存</button>
+      <button onClick={toggleAddPartForm}><FaPlus /></button>
+      <button onClick={addSong}><FaMusic /></button>
+      <button onClick={onExportClick}><FaImage /></button>
 
       {isAddingPart && (
         <div>
