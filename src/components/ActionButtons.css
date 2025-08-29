@@ -1,3 +1,40 @@
+.action-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
 .action-buttons button {
-  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.action-buttons button:nth-child(1) {
+  background-color: #4CAF50; /* Green */
+}
+
+.action-buttons button:nth-child(1):hover {
+  background-color: #45a049;
+}
+
+.action-buttons button:nth-child(2) {
+  background-color: #f44336; /* Red */
+}
+
+.action-buttons button:nth-child(2):hover {
+  background-color: #da190b;
+}
+
+.action-buttons button:nth-child(3) {
+  background-color: #008CBA; /* Blue */
+}
+
+.action-buttons button:nth-child(3):hover {
+  background-color: #007ba7;
 }
