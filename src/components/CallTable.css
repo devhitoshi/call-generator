@@ -13,7 +13,9 @@ th, td {
   padding: 16px;
   text-align: left;
 }
-
+td {
+  cursor: pointer;
+}
 th {
   background-color: var(--table-header-color);
   font-weight: bold;
@@ -22,8 +24,7 @@ th {
 tr:hover {
   background-color: var(--table-row-hover-color);
 }
-
-/* Remove border from the last row's cells */
 tr:last-child td {
   border-bottom: none;
 }
+/* Remove border from the last row's cells */
