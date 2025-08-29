@@ -65,16 +65,24 @@ export const useSongs = () => {
     setSongs([...songs, newSong]);
   };
 
-  const addPart = (newPartName) => {
+  const addPart = (newPartName, index) => {
     const trimmedPartName = newPartName.trim();
-    if (!trimmedPartName) return;
+    if (!trimmedPartName) {
+      // It's better to handle this validation in the component
+      return false;
+    }
 
     if (parts.some(part => part.toLowerCase() === trimmedPartName.toLowerCase())) {
       setPartNameError('このパート名は既に使用されています。');
-      return;
+      return false;
     }
 
-    const newParts = [...parts, trimmedPartName];
+    const newParts = [...parts];
+    if (index === undefined || index === null || index < 0 || index > parts.length) {
+      newParts.push(trimmedPartName);
+    } else {
+      newParts.splice(index, 0, trimmedPartName);
+    }
     setParts(newParts);
 
     const updatedSongs = songs.map(song => {
@@ -85,7 +93,9 @@ export const useSongs = () => {
       return { ...song, calls: newCalls };
     });
     setSongs(updatedSongs);
-    toggleAddPartForm();
+
+    setPartNameError('');
+    return true;
   };
 
   const handleCallChange = (songId, partName, newValue) => {

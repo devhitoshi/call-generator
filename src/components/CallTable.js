@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './CallTable.css';
 import { SongContext } from '../contexts/SongContext';
 import './Modal.css';
-import { FaCog, FaTrash, FaTimes } from 'react-icons/fa';
+import { FaCog, FaTrash, FaTimes, FaPlus } from 'react-icons/fa';
 import {
   DndContext,
   closestCenter,
@@ -42,10 +42,14 @@ function SortableSongRow({ song, parts, onCellClick, deleteSong }) {
       <td {...listeners} style={{ cursor: 'grab', touchAction: 'none' }}>
         {song.name}
       </td>
+      <td className="add-part-cell-body"></td>
       {parts.map(part => (
-        <td key={part} onClick={() => onCellClick(song, part)}>
-          {song.calls[part] || ''}
-        </td>
+        <React.Fragment key={part}>
+          <td onClick={() => onCellClick(song, part)}>
+            {song.calls[part] || ''}
+          </td>
+          <td className="add-part-cell-body"></td>
+        </React.Fragment>
       ))}
       <td>
         <button onClick={() => deleteSong(song.id)}><FaTrash /></button>
@@ -54,7 +58,7 @@ function SortableSongRow({ song, parts, onCellClick, deleteSong }) {
   );
 }
 
-function CallTable({ onCellClick }) {
+function CallTable({ onCellClick, onAddPartClick }) {
   const { songs, parts, deleteSong, deletePart, reorderSongs } = useContext(SongContext);
 
   const sensors = useSensors(
@@ -82,11 +86,19 @@ function CallTable({ onCellClick }) {
           <thead>
             <tr>
               <th>Song</th>
-              {parts.map(part => (
-                <th key={part}>
-                  {part}
-                  <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}><FaTimes /></button>
-                </th>
+              <th className="add-part-cell">
+                <button onClick={() => onAddPartClick(0)} className="add-part-button"><FaPlus /></button>
+              </th>
+              {parts.map((part, index) => (
+                <React.Fragment key={part}>
+                  <th>
+                    {part}
+                    <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}><FaTimes /></button>
+                  </th>
+                  <th className="add-part-cell">
+                    <button onClick={() => onAddPartClick(index + 1)} className="add-part-button"><FaPlus /></button>
+                  </th>
+                </React.Fragment>
               ))}
               <th><FaCog /></th>
             </tr>

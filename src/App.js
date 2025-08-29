@@ -7,10 +7,24 @@ import Modal from './components/Modal';
 
 function App() {
   const printRef = useRef(null);
-  const { exportAsImage, groupName, setGroupName, presets, handleCallChange } = useContext(SongContext);
+  const {
+    exportAsImage,
+    groupName,
+    setGroupName,
+    presets,
+    handleCallChange,
+    addPart,
+    partNameError,
+    parts
+  } = useContext(SongContext);
 
+  // State for Edit-Cell Modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState({ song: null, part: null });
+
+  // State for Add-Part Modal
+  const [isAddPartModalOpen, setIsAddPartModalOpen] = useState(false);
+  const [addPartIndex, setAddPartIndex] = useState(null);
 
   const openModal = (song, part) => {
     setSelectedCell({ song, part });
@@ -20,6 +34,23 @@ function App() {
   const closeModal = () => {
     setModalIsOpen(false);
     setSelectedCell({ song: null, part: null });
+  };
+
+  const openAddPartModal = (index) => {
+    setAddPartIndex(index);
+    setIsAddPartModalOpen(true);
+  };
+
+  const closeAddPartModal = () => {
+    setIsAddPartModalOpen(false);
+    setAddPartIndex(null);
+  };
+
+  const handleSaveNewPart = (newPartName) => {
+    const success = addPart(newPartName, addPartIndex);
+    if (success) {
+      closeAddPartModal();
+    }
   };
 
   const presetsMap = Array.isArray(presets) ? new Map(presets.map(p => [p.name, p.category])) : new Map();
@@ -60,16 +91,31 @@ function App() {
       />
       <div ref={printRef}>
         <h2>{groupName}</h2>
-        <CallTable onCellClick={openModal} renderCellContent={renderCellContent} />
+        <CallTable
+          onCellClick={openModal}
+          renderCellContent={renderCellContent}
+          onAddPartClick={openAddPartModal}
+        />
       </div>
-      <ActionButtons onExportClick={() => exportAsImage(printRef)} />
+      <ActionButtons
+        onExportClick={() => exportAsImage(printRef)}
+        onAddPartClick={() => openAddPartModal(parts.length)}
+      />
       <Modal
+        mode="edit"
         isOpen={modalIsOpen}
         onClose={closeModal}
         song={selectedCell.song}
         part={selectedCell.part}
         onSave={handleCallChange}
         presets={presets}
+      />
+      <Modal
+        mode="add"
+        isOpen={isAddPartModalOpen}
+        onClose={closeAddPartModal}
+        onSave={handleSaveNewPart}
+        partNameError={partNameError}
       />
     </Layout>
   );
