@@ -136,6 +136,18 @@ export const useSongs = () => {
     }
   };
 
+  const reorderSongs = (active, over) => {
+    setSongs((items) => {
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
+      const newItems = Array.from(items);
+      const [removed] = newItems.splice(oldIndex, 1);
+      newItems.splice(newIndex, 0, removed);
+
+      return newItems;
+    });
+  };
+
   return {
     groupName,
     setGroupName,
@@ -151,5 +163,6 @@ export const useSongs = () => {
     deleteSong,
     deletePart,
     exportAsImage,
+    reorderSongs,
   };
 };
