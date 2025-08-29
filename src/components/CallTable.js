@@ -3,9 +3,7 @@ import './CallTable.css';
 import { SongContext } from '../contexts/SongContext';
 
 function CallTable() {
-  const { songs, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
-
-  const parts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
+  const { songs, parts, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
 
   return (
     <table>
@@ -32,13 +30,18 @@ function CallTable() {
                   value={song.calls[part] || ''}
                   onChange={(e) => handleCallChange(song.id, part, e.target.value)}
                 />
-                {presets.map(preset => (
-                  <button
-                    key={preset}
-                    onClick={() => handleCallChange(song.id, part, preset)}
-                  >
-                    {preset}
-                  </button>
+                {Object.entries(presets).map(([category, presetList]) => (
+                  <div key={category} className="preset-category">
+                    <strong>{category}: </strong>
+                    {presetList.map(preset => (
+                      <button
+                        key={preset}
+                        onClick={() => handleCallChange(song.id, part, preset)}
+                      >
+                        {preset}
+                      </button>
+                    ))}
+                  </div>
                 ))}
               </td>
             ))}
