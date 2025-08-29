@@ -21,9 +21,11 @@ function App() {
   ]);
 
   const [isAddingPart, setIsAddingPart] = useState(false);
+  const [partNameError, setPartNameError] = useState('');
   const presets = ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'];
 
   const toggleAddPartForm = () => {
+    setPartNameError(''); // Clear error when toggling form
     setIsAddingPart(!isAddingPart);
   };
 
@@ -44,20 +46,26 @@ function App() {
   };
 
   const addPart = (newPartName) => {
+    const trimmedPartName = newPartName.trim();
+    if (!trimmedPartName) return; // Ignore empty input
 
-    if (newPartName && newPartName.trim() !== '') {
-      const trimmedPartName = newPartName.trim();
-      const updatedSongs = songs.map(song => {
-        // Create a new calls object with the new part
-        const newCalls = {
-          ...song.calls,
-          [trimmedPartName]: ''
-        };
-        // Return a new song object
-        return { ...song, calls: newCalls };
-      });
-      setSongs(updatedSongs);
+    // Check for duplicates
+    const existingParts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
+    if (existingParts.some(part => part.toLowerCase() === trimmedPartName.toLowerCase())) {
+      setPartNameError('このパート名は既に使用されています。');
+      return;
     }
+
+    // If unique, add the part
+    const updatedSongs = songs.map(song => {
+      const newCalls = {
+        ...song.calls,
+        [trimmedPartName]: ''
+      };
+      return { ...song, calls: newCalls };
+    });
+    setSongs(updatedSongs);
+    toggleAddPartForm(); // Close form on success
   };
 
   const handleCallChange = (songName, partName, newValue) => {
@@ -83,6 +91,7 @@ function App() {
         addPart={addPart}
         isAddingPart={isAddingPart}
         toggleAddPartForm={toggleAddPartForm}
+        partNameError={partNameError}
       />
     </div>
   );

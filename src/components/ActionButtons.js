@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ActionButtons.css';
 
 function ActionButtons({
   addSong,
   addPart,
   isAddingPart,
-  toggleAddPartForm
+  toggleAddPartForm,
+  partNameError
 }) {
   const [newPartName, setNewPartName] = useState('');
 
-  const handleSavePart = () => {
-    if (newPartName && newPartName.trim() !== '') {
-      addPart(newPartName);
-      setNewPartName(''); // Reset input
-      toggleAddPartForm(); // Close form
+  // When the form is closed, clear the input field for a better UX.
+  useEffect(() => {
+    if (!isAddingPart) {
+      setNewPartName('');
     }
+  }, [isAddingPart]);
+
+  const handleSavePart = () => {
+    addPart(newPartName);
   };
 
   return (
@@ -32,6 +36,7 @@ function ActionButtons({
             placeholder="新しいパート名"
           />
           <button onClick={handleSavePart}>保存</button>
+          {partNameError && <p style={{color: 'red'}}>{partNameError}</p>}
         </div>
       )}
     </div>
