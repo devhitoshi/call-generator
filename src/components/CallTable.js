@@ -25,7 +25,6 @@ function CallTable({ songs, handleCallChange, presets }) {
                 <input
                   type="text"
                   value={song.calls[part]}
-
                   onChange={(e) => handleCallChange(song.name, part, e.target.value)}
                 />
                 {presets.map(preset => (

@@ -20,7 +20,12 @@ function App() {
     }
   ]);
 
+  const [isAddingPart, setIsAddingPart] = useState(false);
   const presets = ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'];
+
+  const toggleAddPartForm = () => {
+    setIsAddingPart(!isAddingPart);
+  };
 
   const addSong = () => {
     // Get the structure of calls from the first song, if it exists
@@ -38,8 +43,8 @@ function App() {
     setSongs([...songs, newSong]);
   };
 
-  const addPart = () => {
-    const newPartName = window.prompt("新しいパート名を入力してください：");
+  const addPart = (newPartName) => {
+
     if (newPartName && newPartName.trim() !== '') {
       const trimmedPartName = newPartName.trim();
       const updatedSongs = songs.map(song => {
@@ -73,7 +78,12 @@ function App() {
     <div>
       <h1>Idol Call Chart Maker</h1>
       <CallTable songs={songs} handleCallChange={handleCallChange} presets={presets} />
-      <ActionButtons addSong={addSong} addPart={addPart} />
+      <ActionButtons
+        addSong={addSong}
+        addPart={addPart}
+        isAddingPart={isAddingPart}
+        toggleAddPartForm={toggleAddPartForm}
+      />
     </div>
   );
 }
