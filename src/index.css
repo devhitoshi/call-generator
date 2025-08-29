@@ -1,32 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 :root {
-  --background-color: #f0f2f5;
+  /* Refined Color Palette */
+  --background-color: #f8f9fa;
   --surface-color: #ffffff;
-  --primary-color: #28a745;
-  --primary-hover-color: #218838;
-  --destructive-color: #dc3545;
-  --destructive-hover-color: #c82333;
-  --secondary-color: #007bff;
-  --secondary-hover-color: #0069d9;
+
+  --primary-color: #5E5DF0; /* A vibrant, modern blue/purple */
+  --primary-hover-color: #4B4AC4;
+
+  --destructive-color: #E94E77; /* A more vibrant, less harsh red */
+  --destructive-hover-color: #D94269;
+
+  --secondary-color: #6c757d; /* A slightly cooler gray */
+  --secondary-hover-color: #5a6268;
+
   --text-color: #212529;
+  --text-color-light: #495057;
+
   --border-color: #dee2e6;
-  --table-header-color: #f8f9fa;
-  --table-row-hover-color: #f1f3f5;
+  --table-header-color: #f1f3f5;
+  --table-row-hover-color: #e9ecef;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color);
+  background-image: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
   color: var(--text-color);
-  line-height: 1.5;
+  line-height: 1.8; /* Increased for better readability */
+  letter-spacing: 0.01em;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* General input styling */
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--surface-color);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+/* Specific input styling */
+.input-group-name {
+  margin: 20px 0;
+  width: 300px;
+}
+
+/* Typographic hierarchy */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em; /* Adjusted for better readability */
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color-light);
+  letter-spacing: -0.01em; /* Adjusted for better readability */
+}
+
 
 @media screen and (max-width: 768px) {
   body {

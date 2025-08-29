@@ -16,7 +16,7 @@ function App() {
         value={groupName}
         onChange={(e) => setGroupName(e.target.value)}
         placeholder="グループ名"
-        style={{ margin: '20px 0', padding: '10px', width: '300px' }}
+        className="input-group-name"
       />
       <div ref={printRef}>
         <h2>{groupName}</h2>

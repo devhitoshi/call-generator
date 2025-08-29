@@ -27,20 +27,20 @@ function ActionButtons({ onExportClick }) {
 
   return (
     <div className="action-buttons">
-      <button onClick={toggleAddPartForm}><FaPlus /></button>
-      <button onClick={addSong}><FaMusic /></button>
-      <button onClick={onExportClick}><FaImage /></button>
+      <button onClick={toggleAddPartForm} className="btn-secondary"><FaPlus /></button>
+      <button onClick={addSong} className="btn-secondary"><FaMusic /></button>
+      <button onClick={onExportClick} className="btn-primary"><FaImage /></button>
 
       {isAddingPart && (
-        <div>
+        <div className="add-part-form">
           <input
             type="text"
             value={newPartName}
             onChange={(e) => setNewPartName(e.target.value)}
             placeholder="新しいパート名"
           />
-          <button onClick={handleSavePart}>保存</button>
-          {partNameError && <p style={{color: 'red'}}>{partNameError}</p>}
+          <button onClick={handleSavePart} className="btn-primary">保存</button>
+          {partNameError && <p className="error-message">{partNameError}</p>}
         </div>
       )}
     </div>
