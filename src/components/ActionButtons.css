@@ -12,29 +12,48 @@
   font-size: 16px;
   font-weight: bold;
   color: white;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
 }
 
+.action-buttons button:active {
+  transform: scale(0.98);
+}
+
+/* Green button */
 .action-buttons button:nth-child(1) {
-  background-color: #4CAF50; /* Green */
+  background-color: var(--primary-color);
 }
 
 .action-buttons button:nth-child(1):hover {
-  background-color: #45a049;
+  background-color: var(--primary-hover-color);
 }
 
+/* Red button */
 .action-buttons button:nth-child(2) {
-  background-color: #f44336; /* Red */
+  background-color: var(--destructive-color);
 }
 
 .action-buttons button:nth-child(2):hover {
-  background-color: #da190b;
+  background-color: var(--destructive-hover-color);
 }
 
+/* Blue button */
 .action-buttons button:nth-child(3) {
-  background-color: #008CBA; /* Blue */
+  background-color: var(--secondary-color);
 }
 
 .action-buttons button:nth-child(3):hover {
-  background-color: #007ba7;
+  background-color: var(--secondary-hover-color);
+}
+
+@media screen and (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-buttons button {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

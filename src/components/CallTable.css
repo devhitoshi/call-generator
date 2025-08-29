@@ -1,24 +1,39 @@
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden; /* This is important for the border-radius to work on tables */
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   padding: 16px;
   text-align: left;
 }
-
+td {
+  cursor: pointer;
+}
 th {
-  background-color: #f2f2f2;
+  background-color: var(--table-header-color);
   font-weight: bold;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
 tr:hover {
-  background-color: #f1f1f1;
+  background-color: var(--table-row-hover-color);
+}
+tr:last-child td {
+  border-bottom: none;
+}
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 14px;
+  }
 }

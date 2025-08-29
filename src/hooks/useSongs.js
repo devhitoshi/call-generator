@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 
 export const useSongs = () => {
+  // mainブランチのgroupName機能を採用
+  const [groupName, setGroupName] = useState('グループ名');
+
+  // JulesのJSON化機能を採用
   const [songs, setSongs] = useState([]);
   const [parts, setParts] = useState([]);
   const [presets, setPresets] = useState({});
+
+  // 共通のstate
   const [isAddingPart, setIsAddingPart] = useState(false);
   const [partNameError, setPartNameError] = useState('');
 
+  // Julesが実装した、外部JSONを読み込むロジックを丸ごと採用
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +45,8 @@ export const useSongs = () => {
     fetchData();
   }, []);
 
+  // 以下、残りの関数はmainブランチとJulesのブランチで変更がないため、
+  // どちらか一方（基本的にはmainブランチ側）のものをそのままコピーすればOK
   const toggleAddPartForm = () => {
     setPartNameError('');
     setIsAddingPart(!isAddingPart);
@@ -106,7 +115,7 @@ export const useSongs = () => {
       const image = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = image;
-      link.download = 'idol-call-chart.png';
+      link.download = `${groupName || 'idol'}-call-chart.png`; // グループ名をファイル名に利用
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -128,6 +137,8 @@ export const useSongs = () => {
   };
 
   return {
+    groupName,
+    setGroupName,
     songs,
     parts,
     isAddingPart,
