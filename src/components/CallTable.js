@@ -23,19 +23,19 @@ function CallTable() {
       </thead>
       <tbody>
         {songs.map(song => (
-          <tr key={song.name}>
+          <tr key={song.id}>
             <td>{song.name}</td>
             {parts.map(part => (
               <td key={part}>
                 <input
                   type="text"
                   value={song.calls[part] || ''}
-                  onChange={(e) => handleCallChange(song.name, part, e.target.value)}
+                  onChange={(e) => handleCallChange(song.id, part, e.target.value)}
                 />
                 {presets.map(preset => (
                   <button
                     key={preset}
-                    onClick={() => handleCallChange(song.name, part, preset)}
+                    onClick={() => handleCallChange(song.id, part, preset)}
                   >
                     {preset}
                   </button>
@@ -43,7 +43,7 @@ function CallTable() {
               </td>
             ))}
             <td>
-              <button onClick={() => deleteSong(song.name)}>削除</button>
+              <button onClick={() => deleteSong(song.id)}>削除</button>
             </td>
           </tr>
         ))}
