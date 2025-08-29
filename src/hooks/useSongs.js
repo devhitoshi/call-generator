@@ -3,6 +3,7 @@ import { useState } from 'react';
 export const useSongs = () => {
   const [songs, setSongs] = useState([
     {
+      id: 1,
       name: 'スタートライン！',
       calls: {
         '前奏': 'はい！はい！はい！はい！',
@@ -10,6 +11,7 @@ export const useSongs = () => {
       }
     },
     {
+      id: 2,
       name: 'アイドル活動！',
       calls: {
         '間奏': 'タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！ジャージャー！',
@@ -34,6 +36,7 @@ export const useSongs = () => {
       return acc;
     }, {});
     const newSong = {
+      id: Date.now(),
       name: '新しい曲',
       calls: newCalls,
     };
@@ -61,9 +64,9 @@ export const useSongs = () => {
     toggleAddPartForm();
   };
 
-  const handleCallChange = (songName, partName, newValue) => {
+  const handleCallChange = (songId, partName, newValue) => {
     const updatedSongs = songs.map(song => {
-      if (song.name === songName) {
+      if (song.id === songId) {
         const newCalls = {
           ...song.calls,
           [partName]: newValue
@@ -75,9 +78,10 @@ export const useSongs = () => {
     setSongs(updatedSongs);
   };
 
-  const deleteSong = (songName) => {
-    if (window.confirm(`本当にこの曲「${songName}」を削除しますか？`)) {
-      setSongs(songs.filter(song => song.name !== songName));
+  const deleteSong = (songId) => {
+    const songToDelete = songs.find(song => song.id === songId);
+    if (songToDelete && window.confirm(`本当にこの曲「${songToDelete.name}」を削除しますか？`)) {
+      setSongs(songs.filter(song => song.id !== songId));
     }
   };
 
