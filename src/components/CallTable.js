@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './CallTable.css';
+import { SongContext } from '../contexts/SongContext';
 
-function CallTable({ songs, handleCallChange, presets }) {
+function CallTable() {
+  const { songs, handleCallChange, presets } = useContext(SongContext);
+
   // Determine the column headers from the parts of the first song.
   // This assumes all songs have the same parts structure.
   const parts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
@@ -24,7 +27,7 @@ function CallTable({ songs, handleCallChange, presets }) {
               <td key={part}>
                 <input
                   type="text"
-                  value={song.calls[part]}
+                  value={song.calls[part] || ''}
                   onChange={(e) => handleCallChange(song.name, part, e.target.value)}
                 />
                 {presets.map(preset => (
