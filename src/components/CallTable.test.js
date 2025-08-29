@@ -17,8 +17,12 @@ jest.mock('../hooks/useSongs', () => ({
         }
       },
     ],
+    parts: ['前奏', 'Aメロ'], // Add this line
     handleCallChange: mockHandleCallChange,
-    presets: ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'],
+    presets: {
+      'MIX': ['スタンダードMIX', '日本語MIX'],
+      'その他': ['振りコピ', 'ケチャ']
+    },
     deleteSong: jest.fn(),
     deletePart: jest.fn(),
   }),
