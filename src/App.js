@@ -1,14 +1,15 @@
 import React from 'react';
 import CallTable from './components/CallTable';
 import ActionButtons from './components/ActionButtons';
+import Layout from './components/Layout';
 
 function App() {
   return (
-    <div>
+    <Layout>
       <h1>Idol Call Chart Maker</h1>
       <CallTable />
       <ActionButtons />
-    </div>
+    </Layout>
   );
 }
 
