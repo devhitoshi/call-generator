@@ -2,6 +2,7 @@ import { useState } from 'react';
 import html2canvas from 'html2canvas';
 
 export const useSongs = () => {
+  const [groupName, setGroupName] = useState('グループ名');
   const [songs, setSongs] = useState([
     {
       id: 1,
@@ -111,6 +112,8 @@ export const useSongs = () => {
   };
 
   return {
+    groupName,
+    setGroupName,
     songs,
     isAddingPart,
     partNameError,
