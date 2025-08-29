@@ -75,6 +75,23 @@ export const useSongs = () => {
     setSongs(updatedSongs);
   };
 
+  const deleteSong = (songName) => {
+    if (window.confirm(`本当にこの曲「${songName}」を削除しますか？`)) {
+      setSongs(songs.filter(song => song.name !== songName));
+    }
+  };
+
+  const deletePart = (partName) => {
+    if (window.confirm(`本当にこのパート「${partName}」を削除しますか？`)) {
+      const updatedSongs = songs.map(song => {
+        const newCalls = { ...song.calls };
+        delete newCalls[partName];
+        return { ...song, calls: newCalls };
+      });
+      setSongs(updatedSongs);
+    }
+  };
+
   return {
     songs,
     isAddingPart,
@@ -84,5 +101,7 @@ export const useSongs = () => {
     addSong,
     addPart,
     handleCallChange,
+    deleteSong,
+    deletePart,
   };
 };

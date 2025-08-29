@@ -3,10 +3,8 @@ import './CallTable.css';
 import { SongContext } from '../contexts/SongContext';
 
 function CallTable() {
-  const { songs, handleCallChange, presets } = useContext(SongContext);
+  const { songs, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
 
-  // Determine the column headers from the parts of the first song.
-  // This assumes all songs have the same parts structure.
   const parts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
 
   return (
@@ -15,8 +13,12 @@ function CallTable() {
         <tr>
           <th>Song</th>
           {parts.map(part => (
-            <th key={part}>{part}</th>
+            <th key={part}>
+              {part}
+              <button onClick={() => deletePart(part)} style={{marginLeft: '5px', cursor: 'pointer', padding: '2px 5px'}}>x</button>
+            </th>
           ))}
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -40,6 +42,9 @@ function CallTable() {
                 ))}
               </td>
             ))}
+            <td>
+              <button onClick={() => deleteSong(song.name)}>削除</button>
+            </td>
           </tr>
         ))}
       </tbody>
