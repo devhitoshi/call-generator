@@ -4,9 +4,9 @@ import { SongContext } from '../contexts/SongContext';
 import Modal from './Modal';
 import './Modal.css';
 import { FaCog, FaTrash, FaTimes } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function CallTable() {
-  // Julesの変更（partsを追加）と、mainの変更（useStateなど）を両方取り込む
   const { songs, parts, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState({ song: null, part: null });
@@ -21,7 +21,6 @@ function CallTable() {
     setSelectedCell({ song: null, part: null });
   };
 
-  // return文以降は、mainブランチの完成された構造をそのまま使う
   return (
     <>
       <div className="table-container">
@@ -38,21 +37,29 @@ function CallTable() {
               <th><FaCog /></th>
             </tr>
           </thead>
-          <tbody>
-            {songs.map(song => (
-              <tr key={song.id}>
-                <td>{song.name}</td>
-                {parts.map(part => (
-                  <td key={part} onClick={() => openModal(song, part)}>
-                    {song.calls[part] || ''}
+          <motion.tbody layout>
+            <AnimatePresence>
+              {songs.map(song => (
+                <motion.tr
+                  key={song.id}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <td>{song.name}</td>
+                  {parts.map(part => (
+                    <td key={part} onClick={() => openModal(song, part)}>
+                      {song.calls[part] || ''}
+                    </td>
+                  ))}
+                  <td>
+                    <button onClick={() => deleteSong(song.id)}><FaTrash /></button>
                   </td>
-                ))}
-                <td>
-                  <button onClick={() => deleteSong(song.id)}><FaTrash /></button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                </motion.tr>
+              ))}
+            </AnimatePresence>
+          </motion.tbody>
         </table>
       </div>
       <Modal
