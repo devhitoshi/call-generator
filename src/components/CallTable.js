@@ -23,35 +23,39 @@ function CallTable() {
 
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            <th>Song</th>
-            {parts.map(part => (
-              <th key={part}>
-                {part}
-                <button onClick={() => deletePart(part)} style={{marginLeft: '5px', cursor: 'pointer', padding: '2px 5px'}}>x</button>
-              </th>
-            ))}
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {songs.map(song => (
-            <tr key={song.id}>
-              <td>{song.name}</td>
+      <div className="table-container"> {/* Julesの変更を採用 */}
+        <table>
+          <thead>
+            <tr>
+              <th>Song</th>
               {parts.map(part => (
-                <td key={part} onClick={() => openModal(song, part)}>
-                  {song.calls[part] || ''}
-                </td>
+                <th key={part}>
+                  {part}
+                  <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}>x</button>
+                </th>
               ))}
-              <td>
-                <button onClick={() => deleteSong(song.id)}>削除</button>
-              </td>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {/* mainブランチの完成されたtbodyを採用 */}
+            {songs.map(song => (
+              <tr key={song.id}>
+                <td>{song.name}</td>
+                {parts.map(part => (
+                  <td key={part} onClick={() => openModal(song, part)}>
+                    {song.calls[part] || ''}
+                  </td>
+                ))}
+                <td>
+                  <button onClick={() => deleteSong(song.id)}>削除</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* mainブランチのModalコンポーネントを採用 */}
       <Modal
         isOpen={modalIsOpen}
         onClose={closeModal}

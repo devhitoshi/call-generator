@@ -45,3 +45,15 @@
 .action-buttons button:nth-child(3):hover {
   background-color: var(--secondary-hover-color);
 }
+
+@media screen and (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-buttons button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

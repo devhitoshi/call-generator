@@ -27,4 +27,13 @@ tr:hover {
 tr:last-child td {
   border-bottom: none;
 }
-/* Remove border from the last row's cells */
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
