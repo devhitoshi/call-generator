@@ -8,9 +8,10 @@ function CallTable() {
   const parts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
 
   return (
-    <table>
-      <thead>
-        <tr>
+    <div className="table-container">
+      <table>
+        <thead>
+          <tr>
           <th>Song</th>
           {parts.map(part => (
             <th key={part}>
@@ -49,6 +50,7 @@ function CallTable() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
 
