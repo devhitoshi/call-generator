@@ -7,3 +7,10 @@
   margin: 20px auto;
   padding: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .layout {
+    margin: 10px;
+    padding: 10px;
+  }
+}
