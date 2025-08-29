@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import html2canvas from 'html2canvas';
 
 export const useSongs = () => {
   const [songs, setSongs] = useState([
@@ -85,6 +86,19 @@ export const useSongs = () => {
     }
   };
 
+  const exportAsImage = async (elementRef) => {
+    if (elementRef.current) {
+      const canvas = await html2canvas(elementRef.current);
+      const image = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = 'idol-call-chart.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const deletePart = (partName) => {
     if (window.confirm(`本当にこのパート「${partName}」を削除しますか？`)) {
       const updatedSongs = songs.map(song => {
@@ -107,5 +121,6 @@ export const useSongs = () => {
     handleCallChange,
     deleteSong,
     deletePart,
+    exportAsImage,
   };
 };

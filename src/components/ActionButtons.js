@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './ActionButtons.css';
 import { SongContext } from '../contexts/SongContext';
 
-function ActionButtons() {
+function ActionButtons({ onExportClick }) {
   const {
     addSong,
     addPart,
@@ -28,7 +28,7 @@ function ActionButtons() {
     <div className="action-buttons">
       <button onClick={toggleAddPartForm}>パートを追加</button>
       <button onClick={addSong}>楽曲を追加</button>
-      <button>画像として保存</button>
+      <button onClick={onExportClick}>画像として保存</button>
 
       {isAddingPart && (
         <div>
