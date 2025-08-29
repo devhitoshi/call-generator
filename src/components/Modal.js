@@ -29,10 +29,17 @@ function Modal({ isOpen, onClose, song, part, onSave, presets }) {
           rows="4"
         />
         <div className="presets">
-          {presets.map(preset => (
-            <button key={preset} onClick={() => setCall(preset)}>
-              {preset}
-            </button>
+          {presets && Object.entries(presets).map(([category, presetList]) => (
+            <div key={category} className="preset-category">
+              <h4 className="preset-category-title">{category}</h4>
+              <div className="preset-buttons">
+                {presetList.map(preset => (
+                  <button key={preset} onClick={() => setCall(call + preset)} className="preset-button">
+                    {preset}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
         <div className="modal-actions">
