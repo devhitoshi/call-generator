@@ -44,6 +44,7 @@ function App() {
   };
 
   const addPart = (newPartName) => {
+
     if (newPartName && newPartName.trim() !== '') {
       const trimmedPartName = newPartName.trim();
       const updatedSongs = songs.map(song => {
