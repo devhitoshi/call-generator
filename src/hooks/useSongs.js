@@ -158,6 +158,40 @@ export const useSongs = () => {
     });
   };
 
+  const updateSongName = (songId, newName) => {
+    const trimmedName = newName.trim();
+    if (!trimmedName) return;
+
+    setSongs(songs.map(song =>
+      song.id === songId ? { ...song, name: trimmedName } : song
+    ));
+  };
+
+  const updatePartName = (oldName, newName) => {
+    const trimmedName = newName.trim();
+    if (!trimmedName || trimmedName === oldName) return;
+
+    if (parts.some(part => part.toLowerCase() === trimmedName.toLowerCase())) {
+      setPartNameError('このパート名は既に使用されています。');
+      // This error should be displayed in the modal, so we might need to handle it there.
+      // For now, we just stop the update.
+      return;
+    }
+
+    setParts(parts.map(part => (part === oldName ? trimmedName : part)));
+
+    setSongs(songs.map(song => {
+      const newCalls = { ...song.calls };
+      if (oldName in newCalls) {
+        newCalls[trimmedName] = newCalls[oldName];
+        delete newCalls[oldName];
+      }
+      return { ...song, calls: newCalls };
+    }));
+
+    setPartNameError('');
+  };
+
   return {
     groupName,
     setGroupName,
@@ -174,5 +208,7 @@ export const useSongs = () => {
     deletePart,
     exportAsImage,
     reorderSongs,
+    updateSongName,
+    updatePartName,
   };
 };

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './CallTable.css';
 import { SongContext } from '../contexts/SongContext';
 import './Modal.css';
-import { FaCog, FaTrash, FaTimes, FaPlus } from 'react-icons/fa';
+import { FaCog, FaTrash, FaTimes, FaPlus, FaGripVertical } from 'react-icons/fa';
 import {
   DndContext,
   closestCenter,
@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-function SortableSongRow({ song, parts, onCellClick, deleteSong }) {
+function SortableSongRow({ song, parts, onCellClick, deleteSong, onSongNameClick }) {
   const {
     attributes,
     listeners,
@@ -39,7 +39,10 @@ function SortableSongRow({ song, parts, onCellClick, deleteSong }) {
 
   return (
     <tr ref={setNodeRef} style={style} {...attributes}>
-      <td {...listeners} style={{ cursor: 'grab', touchAction: 'none' }}>
+      <td className="drag-handle" {...listeners} style={{ cursor: 'grab', touchAction: 'none' }}>
+        <FaGripVertical />
+      </td>
+      <td onClick={() => onSongNameClick(song)} style={{ cursor: 'pointer' }}>
         {song.name}
       </td>
       <td className="add-part-cell-body"></td>
@@ -58,7 +61,7 @@ function SortableSongRow({ song, parts, onCellClick, deleteSong }) {
   );
 }
 
-function CallTable({ onCellClick, onAddPartClick }) {
+function CallTable({ onCellClick, onAddPartClick, onSongNameClick, onPartNameClick }) {
   const { songs, parts, deleteSong, deletePart, reorderSongs } = useContext(SongContext);
 
   const sensors = useSensors(
@@ -85,15 +88,16 @@ function CallTable({ onCellClick, onAddPartClick }) {
         <table>
           <thead>
             <tr>
+              <th></th>
               <th>Song</th>
               <th className="add-part-cell">
                 <button onClick={() => onAddPartClick(0)} className="add-part-button"><FaPlus /></button>
               </th>
               {parts.map((part, index) => (
                 <React.Fragment key={part}>
-                  <th>
+                  <th onClick={() => onPartNameClick(part)} style={{ cursor: 'pointer' }}>
                     {part}
-                    <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}><FaTimes /></button>
+                    <button onClick={(e) => { e.stopPropagation(); deletePart(part); }} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}><FaTimes /></button>
                   </th>
                   <th className="add-part-cell">
                     <button onClick={() => onAddPartClick(index + 1)} className="add-part-button"><FaPlus /></button>
@@ -115,6 +119,7 @@ function CallTable({ onCellClick, onAddPartClick }) {
                   parts={parts}
                   onCellClick={onCellClick}
                   deleteSong={deleteSong}
+                  onSongNameClick={onSongNameClick}
                 />
               ))}
             </SortableContext>
