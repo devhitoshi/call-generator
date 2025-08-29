@@ -12,6 +12,7 @@ th, td {
   border-bottom: 1px solid var(--border-color);
   padding: 16px;
   text-align: left;
+  vertical-align: middle;
 }
 td {
   cursor: pointer;
@@ -19,6 +20,17 @@ td {
 th {
   background-color: var(--table-header-color);
   font-weight: bold;
+}
+th > button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  margin-left: 5px;
+  vertical-align: middle;
 }
 
 tr:hover {

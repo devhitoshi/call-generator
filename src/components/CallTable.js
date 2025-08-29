@@ -3,6 +3,7 @@ import './CallTable.css';
 import { SongContext } from '../contexts/SongContext';
 import Modal from './Modal';
 import './Modal.css';
+import { FaCog, FaTrash, FaTimes } from 'react-icons/fa';
 
 function CallTable() {
   // Julesの変更（partsを追加）と、mainの変更（useStateなど）を両方取り込む
@@ -31,10 +32,10 @@ function CallTable() {
               {parts.map(part => (
                 <th key={part}>
                   {part}
-                  <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}>x</button>
+                  <button onClick={() => deletePart(part)} style={{ marginLeft: '5px', cursor: 'pointer', padding: '2px 5px' }}><FaTimes /></button>
                 </th>
               ))}
-              <th>Actions</th>
+              <th><FaCog /></th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +48,7 @@ function CallTable() {
                   </td>
                 ))}
                 <td>
-                  <button onClick={() => deleteSong(song.id)}>削除</button>
+                  <button onClick={() => deleteSong(song.id)}><FaTrash /></button>
                 </td>
               </tr>
             ))}
