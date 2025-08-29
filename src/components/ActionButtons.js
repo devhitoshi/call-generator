@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './ActionButtons.css';
+import { SongContext } from '../contexts/SongContext';
 
-function ActionButtons({
-  addSong,
-  addPart,
-  isAddingPart,
-  toggleAddPartForm,
-  partNameError
-}) {
+function ActionButtons() {
+  const {
+    addSong,
+    addPart,
+    isAddingPart,
+    toggleAddPartForm,
+    partNameError
+  } = useContext(SongContext);
+
   const [newPartName, setNewPartName] = useState('');
 
   // When the form is closed, clear the input field for a better UX.
