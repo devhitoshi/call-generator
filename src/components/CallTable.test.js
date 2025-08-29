@@ -19,10 +19,12 @@ jest.mock('../hooks/useSongs', () => ({
     ],
     parts: ['前奏', 'Aメロ'], // Add this line
     handleCallChange: mockHandleCallChange,
-    presets: {
-      'MIX': ['スタンダードMIX', '日本語MIX'],
-      'その他': ['振りコピ', 'ケチャ']
-    },
+    presets: [
+      { "name": "スタンダードMIX", "category": "MIX", "category_name": "MIX" },
+      { "name": "日本語MIX", "category": "MIX", "category_name": "MIX" },
+      { "name": "振りコピ", "category": "Dousa", "category_name": "動作・ヲタ芸" },
+      { "name": "ケチャ", "category": "Dousa", "category_name": "動作・ヲタ芸" }
+    ],
     deleteSong: jest.fn(),
     deletePart: jest.fn(),
   }),

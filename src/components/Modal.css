@@ -28,9 +28,30 @@
   margin-bottom: 10px;
 }
 
-.presets button {
+.preset-button {
   margin-right: 5px;
   margin-bottom: 10px;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.preset-mix {
+  background-color: #4a90e2; /* Blue */
+}
+
+.preset-koujou {
+  background-color: #f5a623; /* Orange */
+}
+
+.preset-dousa {
+  background-color: #50e3c2; /* Teal */
 }
 
 .modal-actions {
