@@ -1,9 +1,11 @@
 import React, { useRef, useContext, useState } from 'react';
+import './App.css';
 import CallTable from './components/CallTable';
 import ActionButtons from './components/ActionButtons';
 import Layout from './components/Layout';
 import { SongContext } from './contexts/SongContext';
 import Modal from './components/Modal';
+import InputModal from './components/InputModal';
 
 function App() {
   const printRef = useRef(null);
@@ -15,7 +17,9 @@ function App() {
     handleCallChange,
     addPart,
     partNameError,
-    parts
+    parts,
+    updateSongName,
+    updatePartName,
   } = useContext(SongContext);
 
   // State for Edit-Cell Modal
@@ -25,6 +29,17 @@ function App() {
   // State for Add-Part Modal
   const [isAddPartModalOpen, setIsAddPartModalOpen] = useState(false);
   const [addPartIndex, setAddPartIndex] = useState(null);
+
+  // State for Group-Name-Edit Modal
+  const [isGroupNameModalOpen, setIsGroupNameModalOpen] = useState(false);
+
+  // State for Song-Name-Edit Modal
+  const [isSongNameModalOpen, setIsSongNameModalOpen] = useState(false);
+  const [selectedSong, setSelectedSong] = useState(null);
+
+  // State for Part-Name-Edit Modal
+  const [isPartNameModalOpen, setIsPartNameModalOpen] = useState(false);
+  const [selectedPart, setSelectedPart] = useState(null);
 
   const openModal = (song, part) => {
     setSelectedCell({ song, part });
@@ -51,6 +66,37 @@ function App() {
     if (success) {
       closeAddPartModal();
     }
+  };
+
+  const handleGroupNameSave = (newName) => {
+    setGroupName(newName);
+    setIsGroupNameModalOpen(false);
+  };
+
+  const openSongNameModal = (song) => {
+    setSelectedSong(song);
+    setIsSongNameModalOpen(true);
+  };
+
+  const handleSongNameSave = (newName) => {
+    if (selectedSong) {
+      updateSongName(selectedSong.id, newName);
+    }
+    setIsSongNameModalOpen(false);
+    setSelectedSong(null);
+  };
+
+  const openPartNameModal = (part) => {
+    setSelectedPart(part);
+    setIsPartNameModalOpen(true);
+  };
+
+  const handlePartNameSave = (newName) => {
+    if (selectedPart) {
+      updatePartName(selectedPart, newName);
+    }
+    setIsPartNameModalOpen(false);
+    setSelectedPart(null);
   };
 
   const presetsMap = Array.isArray(presets) ? new Map(presets.map(p => [p.name, p.category])) : new Map();
@@ -82,25 +128,47 @@ function App() {
   return (
     <Layout>
       <h1>Idol Call Chart Maker</h1>
-      <input
-        type="text"
-        value={groupName}
-        onChange={(e) => setGroupName(e.target.value)}
-        placeholder="グループ名"
-        style={{ margin: '20px 0', padding: '10px', width: '300px' }}
-      />
       <div ref={printRef}>
-        <h2>{groupName}</h2>
+        <div className="group-name-container" onClick={() => setIsGroupNameModalOpen(true)}>
+          <h2 className="group-name-h2">{groupName || 'グループ名'}</h2>
+        </div>
         <CallTable
           onCellClick={openModal}
           renderCellContent={renderCellContent}
           onAddPartClick={openAddPartModal}
+          onSongNameClick={openSongNameModal}
+          onPartNameClick={openPartNameModal}
         />
       </div>
       <ActionButtons
         onExportClick={() => exportAsImage(printRef)}
         onAddPartClick={() => openAddPartModal(parts.length)}
       />
+      <InputModal
+        isOpen={isGroupNameModalOpen}
+        onClose={() => setIsGroupNameModalOpen(false)}
+        onSave={handleGroupNameSave}
+        title="グループ名編集"
+        initialValue={groupName}
+      />
+      {selectedSong && (
+        <InputModal
+          isOpen={isSongNameModalOpen}
+          onClose={() => setIsSongNameModalOpen(false)}
+          onSave={handleSongNameSave}
+          title="楽曲名編集"
+          initialValue={selectedSong.name}
+        />
+      )}
+      {selectedPart && (
+        <InputModal
+          isOpen={isPartNameModalOpen}
+          onClose={() => setIsPartNameModalOpen(false)}
+          onSave={handlePartNameSave}
+          title="パート名編集"
+          initialValue={selectedPart}
+        />
+      )}
       <Modal
         mode="edit"
         isOpen={modalIsOpen}
