@@ -5,11 +5,10 @@ import Modal from './Modal';
 import './Modal.css';
 
 function CallTable() {
-  const { songs, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
+  // Julesの変更（partsを追加）と、mainの変更（useStateなど）を両方取り込む
+  const { songs, parts, handleCallChange, presets, deleteSong, deletePart } = useContext(SongContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState({ song: null, part: null });
-
-  const parts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
 
   const openModal = (song, part) => {
     setSelectedCell({ song, part });
@@ -21,9 +20,10 @@ function CallTable() {
     setSelectedCell({ song: null, part: null });
   };
 
+  // return文以降は、mainブランチの完成された構造をそのまま使う
   return (
     <>
-      <div className="table-container"> {/* Julesの変更を採用 */}
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -38,7 +38,6 @@ function CallTable() {
             </tr>
           </thead>
           <tbody>
-            {/* mainブランチの完成されたtbodyを採用 */}
             {songs.map(song => (
               <tr key={song.id}>
                 <td>{song.name}</td>
@@ -55,7 +54,6 @@ function CallTable() {
           </tbody>
         </table>
       </div>
-      {/* mainブランチのModalコンポーネントを採用 */}
       <Modal
         isOpen={modalIsOpen}
         onClose={closeModal}

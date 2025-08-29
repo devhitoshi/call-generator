@@ -1,39 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 
 export const useSongs = () => {
+  // mainブランチのgroupName機能を採用
   const [groupName, setGroupName] = useState('グループ名');
-  const [songs, setSongs] = useState([
-    {
-      id: 1,
-      name: 'スタートライン！',
-      calls: {
-        '前奏': 'はい！はい！はい！はい！',
-        'Aメロ': 'L・O・V・E・ラブリー・みくる！',
-      }
-    },
-    {
-      id: 2,
-      name: 'アイドル活動！',
-      calls: {
-        '間奏': 'タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！ジャージャー！',
-        'アウトロ': 'お疲れ様でした！',
-      }
-    }
-  ]);
 
+  // JulesのJSON化機能を採用
+  const [songs, setSongs] = useState([]);
+  const [parts, setParts] = useState([]);
+  const [presets, setPresets] = useState({});
+
+  // 共通のstate
   const [isAddingPart, setIsAddingPart] = useState(false);
   const [partNameError, setPartNameError] = useState('');
-  const presets = ['スタンダードMIX', '日本語MIX', '振りコピ', 'ケチャ'];
 
+  // Julesが実装した、外部JSONを読み込むロジックを丸ごと採用
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [partsRes, presetsRes] = await Promise.all([
+          fetch('/data/defaultParts.json'),
+          fetch('/data/presets.json')
+        ]);
+        const defaultParts = await partsRes.json();
+        const callPresets = await presetsRes.json();
+
+        setParts(defaultParts);
+        setPresets(callPresets);
+
+        const initialCalls = defaultParts.reduce((acc, part) => {
+          acc[part] = '';
+          return acc;
+        }, {});
+
+        setSongs([{
+          id: 1,
+          name: 'サンプル曲',
+          calls: initialCalls
+        }]);
+      } catch (error) {
+        console.error("Failed to fetch initial data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 以下、残りの関数はmainブランチとJulesのブランチで変更がないため、
+  // どちらか一方（基本的にはmainブランチ側）のものをそのままコピーすればOK
   const toggleAddPartForm = () => {
-    setPartNameError(''); // Clear error when toggling form
+    setPartNameError('');
     setIsAddingPart(!isAddingPart);
   };
 
   const addSong = () => {
-    const callKeys = songs.length > 0 ? Object.keys(songs[0].calls) : [];
-    const newCalls = callKeys.reduce((acc, key) => {
+    const newCalls = parts.reduce((acc, key) => {
       acc[key] = '';
       return acc;
     }, {});
@@ -49,11 +69,13 @@ export const useSongs = () => {
     const trimmedPartName = newPartName.trim();
     if (!trimmedPartName) return;
 
-    const existingParts = songs.length > 0 ? Object.keys(songs[0].calls) : [];
-    if (existingParts.some(part => part.toLowerCase() === trimmedPartName.toLowerCase())) {
+    if (parts.some(part => part.toLowerCase() === trimmedPartName.toLowerCase())) {
       setPartNameError('このパート名は既に使用されています。');
       return;
     }
+
+    const newParts = [...parts, trimmedPartName];
+    setParts(newParts);
 
     const updatedSongs = songs.map(song => {
       const newCalls = {
@@ -93,7 +115,7 @@ export const useSongs = () => {
       const image = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = image;
-      link.download = 'idol-call-chart.png';
+      link.download = `${groupName || 'idol'}-call-chart.png`; // グループ名をファイル名に利用
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -102,6 +124,9 @@ export const useSongs = () => {
 
   const deletePart = (partName) => {
     if (window.confirm(`本当にこのパート「${partName}」を削除しますか？`)) {
+      const newParts = parts.filter(p => p !== partName);
+      setParts(newParts);
+
       const updatedSongs = songs.map(song => {
         const newCalls = { ...song.calls };
         delete newCalls[partName];
@@ -115,6 +140,7 @@ export const useSongs = () => {
     groupName,
     setGroupName,
     songs,
+    parts,
     isAddingPart,
     partNameError,
     presets,
