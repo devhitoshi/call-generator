@@ -27,9 +27,18 @@ function ActionButtons({ onExportClick }) {
 
   return (
     <div className="action-buttons">
-      <button onClick={toggleAddPartForm}><FaPlus /></button>
-      <button onClick={addSong}><FaMusic /></button>
-      <button onClick={onExportClick}><FaImage /></button>
+      <button onClick={toggleAddPartForm}>
+        <FaPlus />
+        <span>パートを追加</span>
+      </button>
+      <button onClick={addSong}>
+        <FaMusic />
+        <span>楽曲を追加</span>
+      </button>
+      <button onClick={onExportClick}>
+        <FaImage />
+        <span>画像として保存</span>
+      </button>
 
       {isAddingPart && (
         <div>

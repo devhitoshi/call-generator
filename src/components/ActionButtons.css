@@ -13,6 +13,9 @@
   font-weight: bold;
   color: white;
   transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .action-buttons button:active {
