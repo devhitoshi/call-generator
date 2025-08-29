@@ -39,6 +39,30 @@ tr:hover {
 tr:last-child td {
   border-bottom: none;
 }
+
+.call-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  margin-right: 4px;
+  margin-bottom: 4px; /* Add margin-bottom for wrapping */
+  line-height: 1.2; /* Adjust line-height for better spacing */
+}
+
+.call-tag-mix {
+  background-color: #4a90e2; /* Blue */
+}
+
+.call-tag-koujou {
+  background-color: #f5a623; /* Orange */
+}
+
+.call-tag-dousa {
+  background-color: #50e3c2; /* Teal */
+}
+
+
 @media screen and (max-width: 768px) {
   .table-container {
     overflow-x: auto;
