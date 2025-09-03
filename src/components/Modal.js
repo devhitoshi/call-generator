@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Modal.css';
 
 function Modal({
@@ -26,10 +27,6 @@ function Modal({
     }
   }, [isOpen, mode, song, part]);
 
-  if (!isOpen) {
-    return null;
-  }
-
   const handleSave = () => {
     if (mode === 'edit') {
       onSave(song.id, part, call);
@@ -38,6 +35,35 @@ function Modal({
       onSave(newPartName);
       // The modal is closed by the caller in App.js if save is successful
     }
+  };
+
+  const backdropVariants = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  };
+
+  const modalVariants = {
+    hidden: {
+      scale: 0.95,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    exit: {
+      scale: 0.95,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   const renderEditMode = () => (
@@ -84,15 +110,33 @@ function Modal({
   );
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        {mode === 'edit' ? renderEditMode() : renderAddMode()}
-        <div className="modal-actions">
-          <button onClick={handleSave}>保存</button>
-          <button onClick={onClose}>キャンセル</button>
-        </div>
-      </div>
-    </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="modal-overlay"
+          variants={backdropVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          onClick={onClose}
+        >
+          <motion.div
+            className="modal-content"
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {mode === 'edit' ? renderEditMode() : renderAddMode()}
+            <div className="modal-actions">
+              <button onClick={handleSave}>保存</button>
+              <button onClick={onClose}>キャンセル</button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
