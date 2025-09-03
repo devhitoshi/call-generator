@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 17 71% 86%;
+    --foreground: 240 10% 10%;
+    --card: 17 65% 75%;
+    --card-foreground: 240 10% 10%;
+    --popover: 17 65% 75%;
+    --popover-foreground: 240 10% 10%;
+    --primary: 39 81% 67%;
+    --primary-foreground: 240 10% 10%;
+    --secondary: 180 21% 48%;
+    --secondary-foreground: 240 10% 10%;
+    --muted: 180 21% 68%;
+    --muted-foreground: 180 21% 28%;
+    --accent: 165 21% 81%;
+    --accent-foreground: 240 10% 10%;
+    --destructive: 2 100% 69%;
+    --destructive-foreground: 240 10% 10%;
+    --border: 17 55% 70%;
+    --input: 17 55% 70%;
+    --ring: 39 81% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* As dark mode is not in scope, I'll leave the default dark theme here for now. */
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 216 34% 17%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: sans-serif;
+  }
+}
