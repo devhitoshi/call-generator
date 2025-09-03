@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# コールジェネレータ (Call Generator)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**あなただけの最強のコール表を、もっと楽しく、もっと直感的に。**
 
-## Available Scripts
+アイドルやアーティストのライブで使われる「コール」や「MIX」を、曲のパートごとに整理できるWebアプリケーションです。
+もうスクリーンショットやメモアプリを探し回る必要はありません。このアプリ一つで、コール表の作成、編集、共有が完結します。
 
-In the project directory, you can run:
+**[デモを試す！] (https://call-generator.vercel.app/)**
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*(ここにアプリのスクリーンショットを挿入すると、さらに魅力的になります！)*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✨ 主な機能
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **直感的なUI:** スプレッドシートのように、誰でも簡単にコール表を作成・編集できます。
+* **柔軟な編集機能:**
+    * ドラッグ＆ドロップで曲順を自由に入れ替え。
+    * 「Aメロ」と「Bメロ」の間など、好きな位置にパート（列）を挿入。
+    * ワンクリックで楽曲を複製。
+* **便利な入力支援:**
+    * 「スタンダードMIX」などの定型コールをボタン一つで入力できるプリセット機能。
+    * 全ての編集は、アニメーション付きの使いやすいモーダルUIに統一。
+* **自動保存:** 作成中のデータはブラウザに自動で保存されるので、間違えてタブを閉じても安心です。
+* **画像出力:** 完成したコール表は、PNG画像として簡単にダウンロードできます。
+* **可愛いデザイン:** アイドルの世界観に合った、使っていて楽しくなるパステルカラーのデザイン。
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 使い方
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1.  **[サイトにアクセス] (https://call-generator.vercel.app/)** します。
+2.  **グループ名**を入力します。
+3.  **「＋ 楽曲を追加」**ボタンや、ヘッダーの間の**「＋」**ボタンで、曲やパートを追加・編集します。
+4.  各セルをクリックして、コールを入力します。
+5.  **「画像として保存」**ボタンで、完成したコール表をダウンロード！
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 開発者向け情報
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+このプロジェクトは、AI開発エージェント「Jules」とLLM「Gemini」との協業による**「仕様書駆動開発」**の実験的な試みでもあります。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* **主要な技術スタック:**
+    * React / Hooks / Context API
+    * **UI Framework:** Shadcn/ui & Tailwind CSS
+    * **Interaction:** dnd-kit (ドラッグ＆ドロップ), Framer Motion (アニメーション)
+* **開発プロセス:**
+    * リポジトリ内の`REQUIREMENT.md`や`DESIGN.md`を「唯一の正典」とし、AIがそれを解釈して開発を進めます。
+    * 開発ルールは`CONTRIBUTING.md`に、Issueのテンプレートは`.github/ISSUE_TEMPLATE`に定義されています。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### ローカル環境での実行
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1.  このリポジトリをクローンします。
+    ```sh
+    git clone [https://github.com/devhitoshi/call-generator.git](https://github.com/devhitoshi/call-generator.git)
+    ```
+2.  プロジェクトディレクトリに移動します。
+    ```sh
+    cd call-generator
+    ```
+3.  依存パッケージをインストールします。
+    ```sh
+    npm install
+    ```
+4.  開発サーバーを起動します。
+    ```sh
+    npm start
+    ```
+    ブラウザで `http://localhost:3000` が開きます。
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 貢献
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+バグ報告や機能提案は、GitHub Issuesまでお気軽にどうぞ！
 
-### Code Splitting
+## ライセンス
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+このプロジェクトは [MIT License](LICENSE) の下で公開されています。
