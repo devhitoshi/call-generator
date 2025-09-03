@@ -12,7 +12,7 @@
 }
 
 .input-modal-content {
-  background-color: white;
+  background-color: var(--surface-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@
 .input-modal-input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 1rem;
   box-sizing: border-box; /* Ensures padding doesn't affect final width */
@@ -52,11 +52,11 @@
 }
 
 .input-modal-save-button {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .input-modal-cancel-button {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--table-row-hover-color);
+  color: var(--text-color);
 }

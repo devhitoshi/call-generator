@@ -1,16 +1,17 @@
 :root {
-  --background-color: #f0f2f5;
-  --surface-color: #ffffff;
-  --primary-color: #28a745;
-  --primary-hover-color: #218838;
-  --destructive-color: #dc3545;
-  --destructive-hover-color: #c82333;
-  --secondary-color: #007bff;
-  --secondary-hover-color: #0069d9;
-  --text-color: #212529;
-  --border-color: #dee2e6;
-  --table-header-color: #f8f9fa;
-  --table-row-hover-color: #f1f3f5;
+  /* パステルテーマカラー */
+  --background-color: #fdf6f8; /* ごく薄いピンク */
+  --surface-color: #ffffff;    /* 白 */
+  --primary-color: #ffb6c1;    /* ライトピンク */
+  --primary-hover-color: #ff99ac; /* 少し濃いピンク */
+  --destructive-color: #ff6b6b;  /* ソフトな赤 */
+  --destructive-hover-color: #ff4f4f; /* 少し濃いソフトな赤 */
+  --secondary-color: #87ceeb;  /* スカイブルー */
+  --secondary-hover-color: #76bfe0; /* 少し濃いスカイブルー */
+  --text-color: #5c5c5c;         /* ダークグレー */
+  --border-color: #eeeeee;       /* ごく薄いグレー */
+  --table-header-color: #fff0f3; /* 背景より少し濃いピンク */
+  --table-row-hover-color: #fdeef2; /* ホバー用の薄ピンク */
 }
 
 body {

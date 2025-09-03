@@ -20,6 +20,7 @@ td {
 th {
   background-color: var(--table-header-color);
   font-weight: bold;
+  white-space: nowrap;
 }
 th > button {
   background: none;
@@ -51,15 +52,15 @@ tr:last-child td {
 }
 
 .call-tag-mix {
-  background-color: #4a90e2; /* Blue */
+  background-color: #a7c7e7; /* ソフトな青 */
 }
 
 .call-tag-koujou {
-  background-color: #f5a623; /* Orange */
+  background-color: #fddaa2; /* ソフトなオレンジ */
 }
 
 .call-tag-dousa {
-  background-color: #50e3c2; /* Teal */
+  background-color: #b2e2d2; /* ソフトな緑 */
 }
 
 

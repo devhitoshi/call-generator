@@ -11,7 +11,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--surface-color);
   padding: 20px;
   border-radius: 8px;
   width: 500px;
@@ -43,15 +43,15 @@
 }
 
 .preset-mix {
-  background-color: #4a90e2; /* Blue */
+  background-color: #a7c7e7; /* ソフトな青 */
 }
 
 .preset-koujou {
-  background-color: #f5a623; /* Orange */
+  background-color: #fddaa2; /* ソフトなオレンジ */
 }
 
 .preset-dousa {
-  background-color: #50e3c2; /* Teal */
+  background-color: #b2e2d2; /* ソフトな緑 */
 }
 
 .modal-actions {
