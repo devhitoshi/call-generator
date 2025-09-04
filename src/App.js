@@ -1,5 +1,4 @@
 import React, { useRef, useContext, useState } from 'react';
-import './App.css';
 import CallTable from './components/CallTable';
 import ActionButtons from './components/ActionButtons';
 import Layout from './components/Layout';
@@ -127,7 +126,6 @@ function App() {
 
   return (
     <Layout>
-      <h1>Idol Call Chart Maker</h1>
       <div ref={printRef}>
         <div className="group-name-container" onClick={() => setIsGroupNameModalOpen(true)}>
           <h2 className="group-name-h2">{groupName || 'グループ名'}</h2>
